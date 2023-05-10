@@ -4,7 +4,8 @@ import { SignInButton,  UserButton, useUser} from "@clerk/nextjs";
 import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const {data} = api.posts.getAll.useQuery();
+  console.log(data)
   const user = useUser();
   return (
     <>
@@ -16,6 +17,10 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           {!!user.isSignedIn&&<UserButton/>}{!user.isSignedIn&&<SignInButton />}
+        <div className="flex flex-col m-4">
+          {data?.map((post)=>(<div key={post.id} className="flex flex-col bg-slate-400
+           rounded-lg shadow-lg p-4 m-4">post</div>))}
+        </div>
         </div>
       </main>
     </>
