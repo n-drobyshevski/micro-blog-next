@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* old*/ 
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
 
@@ -35,42 +36,42 @@
 
     --radius: 0.5rem;
 
-    --font-sans: 'Roboto', sans-serif;
+    --font-sans: "Roboto", sans-serif;
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
+    --background: 240 21% 15%;
+    --foreground: 226 64% 88%;
 
-    --muted: 223 47% 11%;
-    --muted-foreground: 215.4 16.3% 56.9%;
+    --muted: 223 47% 11%; /* old*/
+    --muted-foreground: 215.4 16.3% 56.9%; /* old*/
 
-    --popover: 224 71% 4%;
-    --popover-foreground: 215 20.2% 65.1%;
+    --popover: 224 71% 4%; /* old*/
+    --popover-foreground: 215 20.2% 65.1%; /* old*/
 
-    --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
+    --card: 237 16% 23%;
+    --card-foreground: 226 64% 88%;
 
-    --border: 216 34% 17%;
-    --input: 216 34% 17%;
+    --border: 233 12% 39%;
+    --input: 233 12% 39%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
+    --primary: 226 64% 88%;
+    --primary-foreground: 234 13% 31%;
 
-    --secondary: 222.2 47.4% 11.2%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 234 13% 29%;
+    --secondary-foreground: 226 64% 88%;
 
-    --accent: 216 34% 17%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 234 13% 29%;
+    --accent-foreground: 217 92% 78%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 343 81% 75%;
+    --destructive-foreground: 240 21% 15%;
 
-    --ring: 216 34% 17%;
+    --ring: 216 34% 17%; /* old*/
 
-    --radius: 0.5rem;
+    --radius: 0.5rem; /* old*/
 
-    --font-sans: 'Roboto', sans-serif;
+    --font-sans: "Roboto", sans-serif;
   }
 }
 
