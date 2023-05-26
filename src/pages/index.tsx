@@ -8,6 +8,21 @@ import { Button } from "~/components/ui/button";
 import { Card, CardHeader } from "~/components/ui/card";
 import { Separator } from "~/components/ui/separator";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "~/components/ui/accordion";
+
 const Home: NextPage = () => {
   const { data } = api.posts.getAll.useQuery();
   console.log(data);
@@ -19,16 +34,38 @@ const Home: NextPage = () => {
         <meta name="description" content="micro blog build with t3 stack" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className="dark flex min-h-screen flex-col items-center bg-background text-foreground">
         <header className="my-4 flex w-[380px] flex-row justify-end">
           {!!user.isSignedIn && <UserButton />}
           {!user.isSignedIn && (
-            <Button asChild >
+            <Button asChild>
               <SignInButton mode="modal">Sign in</SignInButton>
             </Button>
           )}
         </header>
         <Separator />
+        <div className="w-[400px]">
+          <Accordion type="single" collapsible>
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Is it accessible?</AccordionTrigger>
+              <AccordionContent>
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Theme" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="light">Light</SelectItem>
+            <SelectItem value="dark">Dark</SelectItem>
+            <SelectItem value="system">System</SelectItem>
+          </SelectContent>
+        </Select>
+
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <div className="m-4 flex flex-col">
             {data?.map((post) => (
