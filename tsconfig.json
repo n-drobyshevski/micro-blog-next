@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
+    "typeRoots": ["node_modules/@types", "src/local-types"],
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "checkJs": true,
@@ -18,7 +19,8 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "tailwindcss-animate": ["./src/local-types/tailwindcss-animate"]
     }
   },
   "include": [
@@ -29,5 +31,5 @@
     "**/*.cjs",
     "**/*.mjs"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/local-types/**"]
 }
