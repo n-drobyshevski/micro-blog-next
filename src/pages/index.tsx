@@ -1,27 +1,39 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { api } from "~/utils/api";
+import { type RouterOutputs, api } from "~/utils/api";
 
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 
 import { Button } from "~/components/ui/button";
-import { Card, CardHeader } from "~/components/ui/card";
+import { Card, CardContent,  } from "~/components/ui/card";
 import { Separator } from "~/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "~/components/ui/accordion";
+type PostWithUser = RouterOutputs["posts"]["getAll"][number];
+
+const PostView = (props: PostWithUser) => {
+  const { post, author } = props;
+  return (
+    <Card key={post.id} className="w-[380px]">
+      <CardContent className="flex flex-row gap-4 pt-6 items-center">
+        <Avatar>
+          <AvatarImage src={author?.profileImageUrl} />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+        <div className="flex h-full flex-col">
+          <p>
+            <small className="text-sm text-muted-foreground">{`@${author.username}`}</small>
+            <span className="text-sm text-muted-foreground font-thin">{` • ${dayjs(post.createdAt).fromNow()}`}</span> </p>
+          <p className="font-sans capitalize leading-7">{post.content}</p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 const Home: NextPage = () => {
   const { data } = api.posts.getAll.useQuery();
@@ -45,37 +57,11 @@ const Home: NextPage = () => {
           )}
         </header>
         <Separator />
-        <div className="w-[400px]">
-          <Accordion type="single" collapsible>
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Is it accessible?</AccordionTrigger>
-              <AccordionContent>
-                Yes. It adheres to the WAI-ARIA design pattern.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-        <Select>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Theme" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="light">Light</SelectItem>
-            <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
-          </SelectContent>
-        </Select>
 
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <div className="m-4 flex flex-col">
-            {data?.map((post) => (
-              <Card key={post.id} className="w-[380px]">
-                <CardHeader>
-                  <p className="font-sans capitalize leading-7 [&:not(:first-child)]:mt-6">
-                    {post.content}
-                  </p>
-                </CardHeader>
-              </Card>
+            {data?.map((postData) => (
+              <PostView {...postData} key={postData.post.id} />
             ))}
           </div>
         </div>
